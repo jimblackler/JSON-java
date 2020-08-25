@@ -124,7 +124,7 @@ public class JSONPointerTest {
 
     @Test
     public void quotationEscaping() {
-        assertSame(document.get("k\"l"), query("/k\\\\\\\"l"));
+        assertSame(document.get("k\"l"), query("/k\\\"l"));
     }
 
     @Test
@@ -274,6 +274,20 @@ public class JSONPointerTest {
                     "value [null] is not an array or object therefore its key b cannot be resolved".
                     equals(e.getMessage()));
         }
+    }
+
+    /**
+     * Coverage for JSONObject query(JSONPointer)
+     */
+    @Test
+    public void queryFromJSONObjectUsingPointer2() {
+        String str = "{"+
+            "\"string\\\\\\\\Key\":\"hello world!\","+
+            "}"+
+            "}";
+        JSONObject jsonObject = new JSONObject(str);
+        Object obj = jsonObject.query(new JSONPointer("/string\\\\\\\\Key"));
+        assertTrue("Expected 'hello world!'", "hello world!".equals(obj));
     }
 
     /**
