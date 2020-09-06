@@ -259,11 +259,10 @@ public class JSONArray implements Iterable<Object> {
      *             If there is no value for the index.
      */
     public Object get(int index) throws JSONException {
-        Object object = this.opt(index);
-        if (object == null) {
+        if (index < 0 || index >= length()) {
             throw new JSONException("JSONArray[" + index + "] not found.");
         }
-        return object;
+        return this.opt(index);
     }
 
     /**
