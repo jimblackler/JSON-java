@@ -1819,12 +1819,10 @@ public class JSONObject {
         if (key == null) {
             throw new NullPointerException("Null key.");
         }
-        if (value != null) {
-            testValidity(value);
-            this.map.put(key, value);
-        } else {
-            this.remove(key);
-        }
+
+        testValidity(value);
+
+        this.map.put(key, value);
         return this;
     }
 
